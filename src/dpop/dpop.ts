@@ -3,9 +3,11 @@ import * as dpopUtils from './utils';
 
 export class Dpop {
   protected readonly storage: DpopStorage;
+  private providedKeyPair?: dpopUtils.KeyPair;
 
-  public constructor(clientId: string) {
+  public constructor(clientId: string, keyPair?: dpopUtils.KeyPair) {
     this.storage = new DpopStorage(clientId);
+    this.providedKeyPair = keyPair;
   }
 
   public getNonce(id?: string): Promise<string | undefined> {
@@ -17,6 +19,10 @@ export class Dpop {
   }
 
   protected async getOrGenerateKeyPair(): Promise<dpopUtils.KeyPair> {
+    if (this.providedKeyPair) {
+      return this.providedKeyPair;
+    }
+
     let keyPair = await this.storage.findKeyPair();
 
     if (!keyPair) {

@@ -1,5 +1,6 @@
 import { ICache } from './cache';
 import type { Dpop } from './dpop/dpop';
+import type { KeyPair } from './dpop/utils';
 
 export interface AuthorizationParams {
   /**
@@ -281,6 +282,8 @@ export interface Auth0ClientOptions extends BaseLoginOptions {
    * The default setting is `false`.
    */
   useDpop?: boolean;
+
+  dpopKeyPair?: KeyPair;
 }
 
 /**

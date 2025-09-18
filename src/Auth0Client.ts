@@ -229,7 +229,7 @@ export class Auth0Client {
     );
 
     this.dpop = this.options.useDpop
-      ? new Dpop(this.options.clientId)
+      ? new Dpop(this.options.clientId, this.options.dpopKeyPair)
       : undefined;
 
     this.domainUrl = getDomain(this.options.domain);
